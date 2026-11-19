@@ -35,7 +35,243 @@
      This box is empty on purpose. In Part 7 you paste an interactive
      graphic BETWEEN the opening <div> and the closing </div> below.
      ===================================================================== -->
-<div class="showcase"></div>
+<div class="showcase"><!-- HTML: a heading, three clickable record buttons (one per album), and a box that shows the fun fact -->
+<div class="sc-wrap" id="sc-albums">
+  <div class="sc-title">My Top Three Albums</div>
+  <div class="sc-hint">Tap a record for a fun fact</div>
+  <div class="sc-records">
+    <button class="sc-record" type="button" data-album="0" aria-label="Fun fact about Ghosts of the Great Highway">
+      <span class="sc-disc"><span class="sc-label">1</span></span>
+      <span class="sc-name">Ghosts of the Great Highway</span>
+      <span class="sc-artist">Sun Kil Moon</span>
+    </button>
+    <button class="sc-record" type="button" data-album="1" aria-label="Fun fact about Punisher">
+      <span class="sc-disc"><span class="sc-label">2</span></span>
+      <span class="sc-name">Punisher</span>
+      <span class="sc-artist">Phoebe Bridgers</span>
+    </button>
+    <button class="sc-record" type="button" data-album="2" aria-label="Fun fact about Ants From Up There">
+      <span class="sc-disc"><span class="sc-label">3</span></span>
+      <span class="sc-name">Ants From Up There</span>
+      <span class="sc-artist">Black Country, New Road</span>
+    </button>
+  </div>
+  <div class="sc-fact" aria-live="polite">
+    <div class="sc-fact-head">Pick a record above to start.</div>
+    <div class="sc-fact-text">Click again for another fact.</div>
+  </div>
+</div>
+
+<!-- CSS: styles for the showcase only. Every rule starts with .showcase so nothing else on the page changes -->
+<style>
+  .showcase .sc-wrap {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 640px;
+    max-height: 500px;
+    margin: 0 auto;
+    padding: 20px 16px;
+    font-family: "Times New Roman", Times, serif;
+    color: #ffffff;
+    background: #7393B3;
+    border-radius: 14px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .showcase .sc-wrap * {
+    box-sizing: border-box;
+  }
+  .showcase .sc-title {
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  .showcase .sc-hint {
+    font-size: 15px;
+    font-style: italic;
+    margin: 4px 0 16px;
+    opacity: 0.9;
+  }
+  .showcase .sc-records {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  .showcase .sc-record {
+    flex: 1 1 0;
+    max-width: 170px;
+    padding: 8px 4px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: #ffffff;
+    font-family: "Times New Roman", Times, serif;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+  .showcase .sc-record:hover,
+  .showcase .sc-record:focus-visible {
+    transform: translateY(-4px);
+    border-color: #ffffff;
+    outline: none;
+  }
+  .showcase .sc-record.sc-active {
+    background: rgba(112, 41, 99, 0.35);
+    border-color: #702963;
+  }
+  .showcase .sc-disc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 8px;
+    border-radius: 50%;
+    background:
+      repeating-radial-gradient(circle, #1b1b1b 0 2px, #2c2c2c 2px 4px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  .showcase .sc-record.sc-active .sc-disc {
+    animation: sc-spin 2.5s linear infinite;
+  }
+  .showcase .sc-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #702963;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .showcase .sc-name {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+  .showcase .sc-artist {
+    display: block;
+    font-size: 13px;
+    font-style: italic;
+    margin-top: 2px;
+    opacity: 0.9;
+  }
+  .showcase .sc-fact {
+    min-height: 110px;
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: #ffffff;
+    color: #222222;
+    border-left: 6px solid #702963;
+    border-radius: 8px;
+    text-align: left;
+  }
+  .showcase .sc-fact-head {
+    font-size: 16px;
+    font-weight: bold;
+    color: #702963;
+    margin-bottom: 6px;
+  }
+  .showcase .sc-fact-text {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  .showcase .sc-fact.sc-pop {
+    animation: sc-pop 0.35s ease;
+  }
+  @keyframes sc-spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes sc-pop {
+    0% { transform: scale(0.97); opacity: 0.4; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @media (max-width: 480px) {
+    .showcase .sc-wrap { padding: 16px 10px; }
+    .showcase .sc-title { font-size: 22px; }
+    .showcase .sc-records { gap: 6px; }
+    .showcase .sc-disc { width: 64px; height: 64px; }
+    .showcase .sc-label { width: 24px; height: 24px; font-size: 13px; }
+    .showcase .sc-name { font-size: 13px; }
+    .showcase .sc-artist { font-size: 11px; }
+    .showcase .sc-fact { min-height: 120px; padding: 12px; }
+    .showcase .sc-fact-text { font-size: 15px; }
+  }
+</style>
+
+<!-- JavaScript: holds the fun facts and shows the next one each time a record is clicked -->
+<script>
+  (function () {
+    var root = document.getElementById("sc-albums");
+    if (!root) return;
+
+    var albums = [
+      {
+        title: "Ghosts of the Great Highway (2003)",
+        facts: [
+          "Sun Kil Moon is named after Korean boxer Sung-Kil Moon.",
+          "Before Sun Kil Moon, Mark Kozelek led the band Red House Painters.",
+          "\"Salvador Sanchez\" is about the Mexican boxing champ who died in a car crash at just 23.",
+          "\"Duk Koo Kim\" runs over 14 minutes and is named for a Korean boxer who died after a 1982 title fight.",
+          "\"Carry Me Ohio\" nods to Kozelek's roots in Massillon, Ohio.",
+          "Kozelek had a small acting role as a band member in the movie Almost Famous."
+        ]
+      },
+      {
+        title: "Punisher (2020)",
+        facts: [
+          "\"Punisher\" is slang for a fan who talks your ear off. The title track imagines Phoebe as that fan meeting Elliott Smith.",
+          "The album came out a day earlier than planned, in June 2020.",
+          "Punisher earned a Grammy nomination for Best Alternative Music Album, and Phoebe was up for Best New Artist.",
+          "\"Kyoto\" started out as a slow ballad before becoming the upbeat song on the album.",
+          "\"I Know the End\" builds into a huge finale that ends in a scream.",
+          "Phoebe is also one third of boygenius, with Julien Baker and Lucy Dacus."
+        ]
+      },
+      {
+        title: "Ants From Up There (2022)",
+        facts: [
+          "Singer Isaac Wood announced he was leaving the band just four days before the album came out.",
+          "Closing track \"Basketball Shoes\" runs nearly 13 minutes and was played live for years before it was recorded.",
+          "\"Chaos Space Marine\" is named after a Warhammer 40,000 figure.",
+          "The Concorde jet comes up again and again, including in the song \"Concorde.\"",
+          "Black Country, New Road had seven members when they made the record.",
+          "It was only their second album, released about a year after their debut, For the First Time."
+        ]
+      }
+    ];
+
+    var buttons = root.querySelectorAll(".sc-record");
+    var box = root.querySelector(".sc-fact");
+    var head = root.querySelector(".sc-fact-head");
+    var text = root.querySelector(".sc-fact-text");
+    var next = [0, 0, 0];
+
+    function showFact(i) {
+      var album = albums[i];
+      var n = next[i];
+      head.textContent = album.title + " — fact " + (n + 1) + " of " + album.facts.length;
+      text.textContent = album.facts[n];
+      next[i] = (n + 1) % album.facts.length;
+
+      for (var b = 0; b < buttons.length; b++) {
+        buttons[b].classList.toggle("sc-active", b === i);
+      }
+      box.classList.remove("sc-pop");
+      void box.offsetWidth;
+      box.classList.add("sc-pop");
+    }
+
+    for (var k = 0; k < buttons.length; k++) {
+      buttons[k].addEventListener("click", function () {
+        showFact(Number(this.getAttribute("data-album")));
+      });
+    }
+  })();
+</script></div>
 
 <!-- Footer: fill in your name -->
 <footer>Built by YOUR NAME &middot; BMIS 235</footer>
